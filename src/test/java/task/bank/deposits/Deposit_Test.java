@@ -6,7 +6,7 @@ import task.constants.CurrencyData;
 
 public class Deposit_Test {
   private DepositsAbs<Deposit> deposit = null;
-  private final float startBalance = 450.67f;
+  private float startBalance = 450.67f;
 
   @Before
   public void createDeposit() {
@@ -16,7 +16,7 @@ public class Deposit_Test {
   @Test
   public void addMoneyToDeposit() {
     float actualBalance = deposit.addMoneyToBalance(1500).getBalance();
-    assert actualBalance == (float)(Math.round((startBalance + 1500) * 100.0) / 100.0):
+    assert actualBalance - (float)(Math.round((startBalance + 1500) * 100.0) / 100.0) == 0:
         "Error: Balance after adding operation is wrong on deposit";
   }
 

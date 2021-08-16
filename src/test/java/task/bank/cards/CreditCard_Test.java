@@ -10,7 +10,7 @@ public class CreditCard_Test {
 
   private CreditCard creditCard = null;
 
-  private final float startBalance = 100.45f;
+  private float startBalance = 100.45f;
   private final float interestRate= 2;
 
   @Before
@@ -20,7 +20,7 @@ public class CreditCard_Test {
 
   @Test
   public void startBalance() {
-    assert creditCard.getBalance() == startBalance: "Error: Start balance is wrong";
+    assert creditCard.getBalance() - startBalance == 0: "Error: Start balance is wrong";
   }
 
   @Test
@@ -30,13 +30,13 @@ public class CreditCard_Test {
 
   @Test
   public void interestRate() {
-    assert creditCard.getInterestRate() == interestRate: "Error: Interest rate of credit card is wrong";
+    assert creditCard.getInterestRate() - interestRate == 0: "Error: Interest rate of credit card is wrong";
   }
 
   @Test
   public void addMoneyToCreditCard() {
     float actualBalance = creditCard.addMoneyToBalance(23.4567f).getBalance();
-    assert actualBalance == (float)(Math.round((startBalance + 23.4567f) * 100.0) / 100.0):
+    assert actualBalance - (float)(Math.round((startBalance + 23.4567f) * 100.0) / 100.0) == 0:
         "Error: Balance after adding operation is wrong on credit card";
   }
 
@@ -44,7 +44,7 @@ public class CreditCard_Test {
   public void minusMoneyToCreditCard() {
     float value = 12.98756f;
     float actualBalance = creditCard.minusMoneyFromBalance(value).getBalance();
-    assert actualBalance == (float)(Math.round((startBalance - value) * 100.0) / 100.0):
+    assert actualBalance - (float)(Math.round((startBalance - value) * 100.0) / 100.0) == 0:
         "Error: Balance after adding operation is wrong on credit card";
   }
 
@@ -53,7 +53,8 @@ public class CreditCard_Test {
     float creditValue = 5;
     float actualDutyValue = creditCard.minusMoneyFromBalance(startBalance + creditValue).getDutyValue();
 
-    assert actualDutyValue != 0 && actualDutyValue == creditValue: String.format("Error: Duty value should be is %f", creditValue);
+    assert actualDutyValue != 0 && actualDutyValue - creditValue == 0:
+        String.format("Error: Duty value should be is %f", creditValue);
 
     float balance = creditCard.addMoneyToBalance(10f).getDutyValue();
     assert balance == 0: "Error: Duty value should be is 0";

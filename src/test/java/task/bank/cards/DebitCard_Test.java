@@ -10,7 +10,7 @@ public class DebitCard_Test {
   private CardsAbs<DebitCard> debitCard = null;
   private CardsAbs<CurrencyDebitCard> debitCurrencyCard = null;
 
-  private final float startBalance = 245.13f;
+  private float startBalance = 245.13f;
 
   @Before
   public void createDebitCard() {
@@ -21,22 +21,22 @@ public class DebitCard_Test {
   @Test
   public void addMoneyToDebitAndCurrencyDebitCard() {
     float actualBalance = debitCard.addMoneyToBalance(23.4567f).getBalance();
-    assert actualBalance == (float)(Math.round((startBalance + 23.4567f) * 100.0) / 100.0):
+    assert actualBalance - (float)(Math.round((startBalance + 23.4567f) * 100.0) / 100.0) == 0:
           "Error: Balance after adding operation is wrong on debit card";
 
     actualBalance = debitCurrencyCard.addMoneyToBalance(23.4567f).getBalance();
-    assert actualBalance == (float)(Math.round((startBalance + 23.4567f) * 100.0) / 100.0):
+    assert actualBalance - (float)(Math.round((startBalance + 23.4567f) * 100.0) / 100.0) == 0:
         "Error: Balance after adding operation is wrong on debit currency card";
   }
 
   @Test
   public void minusMoneyToDebitAndCurrencyDebitCard() {
     float actualBalance = debitCard.minusMoneyFromBalance(23.4567f).getBalance();
-    assert actualBalance == (float)(Math.round((startBalance - 23.4567f) * 100.0) / 100.0):
+    assert actualBalance - (float)(Math.round((startBalance - 23.4567f) * 100.0) / 100.0) == 0:
         "Error: Balance after adding operation is wrong on debit card";
 
     actualBalance = debitCurrencyCard.minusMoneyFromBalance(23.4567f).getBalance();
-    assert actualBalance == (float)(Math.round((startBalance - 23.4567f) * 100.0) / 100.0):
+    assert actualBalance - (float)(Math.round((startBalance - 23.4567f) * 100.0) / 100.0) == 0:
         "Error: Balance after adding operation is wrong on debit currency card";
   }
 
@@ -45,5 +45,4 @@ public class DebitCard_Test {
     assert !debitCard.getName().isEmpty(): "Debit card name is empty";
     assert !debitCurrencyCard.getName().isEmpty(): "Debit card name is empty";
   }
-
 }

@@ -8,7 +8,7 @@ import java.text.DecimalFormat;
 
 @Getter
 @AllArgsConstructor
-public class ProductAbs<T> {
+public abstract class ProductAbs<T> {
 
   protected T updateBalance(float newBalance) {
     this.balance = newBalance;
